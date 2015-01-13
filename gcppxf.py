@@ -85,6 +85,13 @@ Sky line wavelength mask
 '''
 
 
+default_templates = glob.glob(os.path.expanduser('~') + '/stdstars/t*.fits')
+'''
+Default templates
+Update with the location of the templates on your machine
+'''
+
+
 def cattoz(cat):
     '''
     Convert a CaT index value into metallicity using the conversion of Usher+ 2012
@@ -249,7 +256,7 @@ def ppxfmontecarlo(datum, wavelengths=None, fluxes=None, ivars=None, outputdir='
     logDispersion = np.log10(log_wavelengths[1]) - np.log10(log_wavelengths[0])
     
     if template_files is None:
-        template_files = glob.glob(os.path.expanduser('~') + '/stdstars/t*.fits')
+        template_files = default_templates
         
         
     if not len(template_files):

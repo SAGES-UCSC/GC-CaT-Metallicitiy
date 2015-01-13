@@ -2,7 +2,7 @@
 
 import numpy as np
 import pyfits
-from utils import uopen
+import os
 
 
 ### This is a group of functions meant to manipulate 1d spectra as numpy arrays
@@ -10,7 +10,7 @@ from utils import uopen
 # returns the dispersion and flux as a tuple of arrays from a fits file. The WCS is used to calculate the dispersion. Only simple linear or log dispersion is handled
 def getspectrum(name, axis=None):
 
-	fits = pyfits.open(uopen(name, 'rb'))
+	fits = pyfits.open(open(os.path.abspath(os.path.expanduser(name)), 'rb'))
 	
 	data = fits[0].data
 	

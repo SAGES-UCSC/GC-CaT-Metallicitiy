@@ -1,0 +1,10 @@
+This the Python code I wrote to measure CaT strengths based on the techniques developed by Caroline Foster (2010, AJ, 139, 1566). The code uses the pPXF code of Michele Cappellari (2004, PASP, 116, 138) to fit a linear combination of stellar templates to the object spectrum before normalising the fitted spectrum and measuring the strength of the CaT on the normalised templates.
+
+The Python version of pPXF may be downloaded from Michele's website: http://www-astro.physics.ox.ac.uk/~mxc/software/ . The DEIMOS templates I used can be found in the templates directory in this repository. You will have to update the default_templates variable to the location of these files on your machine
+
+
+If you use this code please cite Usher et al. (2012, MNRAS, 426, 1475) 
+
+
+Chris Usher
+2014-01-13
