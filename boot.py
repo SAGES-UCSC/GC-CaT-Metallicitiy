@@ -7,7 +7,7 @@ Created on Sep 24, 2012
 
 import numpy as np
 import scipy.stats as stats
-import curvefit
+import scipy.optimize as optimize
 import subprocess
 import scipy.interpolate as interpolate
 
@@ -51,7 +51,7 @@ def bootstrap(xs, ys, yes, func, n=1000, names=None, title='', verbose=True, plo
     xs = np.asarray(xs)
     
     if optimizer == None:
-        fit = curvefit.curve_fit(fitting_func, xs, ys, p0=p0, sigma=yes)[0]
+        fit = optimize.curve_fit(fitting_func, xs, ys, p0=p0, sigma=yes)[0]
     
         def newfs(x):
             return func(x, *fit)
@@ -90,7 +90,7 @@ def bootstrap(xs, ys, yes, func, n=1000, names=None, title='', verbose=True, plo
             sample_yes = yes[points] 
             
             if optimizer == None:
-                sample_fit = curvefit.curve_fit(fitting_func, sample_xs, sample_ys, p0=p0, sigma=sample_yes)[0]
+                sample_fit = optimize.curve_fit(fitting_func, sample_xs, sample_ys, p0=p0, sigma=sample_yes)[0]
             else:
                 sample_fit = optimizer(sample_xs, sample_ys, sample_yes)
             
@@ -113,8 +113,8 @@ def bootstrap(xs, ys, yes, func, n=1000, names=None, title='', verbose=True, plo
         
         fits = fits[fits[:,i].argsort()]
         
-        lower = fits[int(.16 * n), i] - fit[i]
-        upper = fits[int(.84 * n) - 1, i] - fit[i]
+        lower = fits[int(0.16 * n), i] - fit[i]
+        upper = fits[int(0.84 * n) - 1, i] - fit[i]
         lowers.append(lower)
         uppers.append(upper)         
         
@@ -176,13 +176,13 @@ def power(x, a, b):
 def expo(x, a, b):
     return 10**(a * x + b)
         
-def unbiased_broken(x, a, b, c, d):
-    
-#    print a, x.min(), x.max()
-#    if a < x.min() or a > x.min():
-    if a < 0:
-        return 1e100
-    return curvefit.broken(x, a, b, c, d)    
+# def unbiased_broken(x, a, b, c, d):
+#     
+# #    print a, x.min(), x.max()
+# #    if a < x.min() or a > x.min():
+#     if a < 0:
+#         return 1e100
+#     return curvefit.broken(x, a, b, c, d)    
         
 def twolinear(x, a, b, k):
     

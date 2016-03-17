@@ -206,7 +206,20 @@ def logtolinear(inputwavelengths, inputfluxes, outside=0, function='spline', rat
     
     return  outputwavelengths, interp(inputwavelengths, inputfluxes, inputedges, inputdispersions, outputwavelengths, outputedges, outside, function, ratio)
     
+def log_redisperse(inputwavelengths, inputfluxes, firstWavelength, lastWavelength, dispersion, outside=0, function='spline', ratio=False):
+        
+    inputedges = np.empty(inputwavelengths.size + 1)
+    inputedges[1:-1] = (inputwavelengths[1:] + inputwavelengths[:-1]) / 2
+    inputedges[0] = 3 * inputwavelengths[0] / 2 - inputwavelengths[1] / 2
+    inputedges[-1] = 3 * inputwavelengths[-1] / 2 - inputwavelengths[-2] / 2
+    inputdispersions = inputedges[1:] - inputedges[:-1]
     
-
+    outputwavelengths = np.arange(np.log10(firstWavelength), np.log10(lastWavelength), dispersion)
+    outputedges = np.linspace(outputwavelengths[0] - dispersion / 2, outputwavelengths[-1] + dispersion / 2, outputwavelengths.size + 1)
+    outputedges = 10**outputedges
+    outputwavelengths = 10**outputwavelengths
+    
+    return outputwavelengths, interp(inputwavelengths, inputfluxes, inputedges, inputdispersions, outputwavelengths, outputedges, outside, function, ratio)
+    
 
 #plt.show()

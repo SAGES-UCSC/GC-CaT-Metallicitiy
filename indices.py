@@ -34,19 +34,19 @@ class Index:
 		
 			
 		self.atomic = atomic
+		#only relevent for SKiMS sky subtraction
 		self.flux = flux
 
 	def __str__(self):
 		return self.name
 
 
-	def __call__(self, wavelengths, fluxes, sigmas=None, normalized=False, calcerrors=False):
+	def __call__(self, wavelengths, fluxes, sigmas=None, normalized=False, calcerrors=True):
 		return self.calculateIndex(wavelengths, fluxes, sigmas=sigmas, normalized=normalized, calcerrors=calcerrors)
 
-	def calculateIndex(self, wavelengths, fluxes, sigmas=None, normalized=False, calcerrors=False):
+	def calculateIndex(self, wavelengths, fluxes, sigmas=None, normalized=False, calcerrors=True):
 		
-		
-		if sigmas == None:
+		if sigmas is None:
 			variances = fluxes
 		else:
 			variances = sigmas**2
