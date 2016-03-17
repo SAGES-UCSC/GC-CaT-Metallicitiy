@@ -1,16 +1,16 @@
-This the Python code I wrote to measure CaT strengths based on the techniques developed by Caroline Foster (2010, AJ, 139, 1566). The code uses the pPXF code of Michele Cappellari (2004, PASP, 116, 138) to fit a linear combination of stellar templates to the object spectrum before normalising the fitted spectrum and measuring the strength of the CaT on the normalised templates.
+This is the Python code I wrote as a wrapper to the pPXF code of Michele Cappellari (2004, PASP, 116, 138). This grew out of code I wrote to measure calcium triplet (CaT) strengths of spectra based on the techniques developed by Caroline Foster (2010, AJ, 139, 1566). To measure the CaT strengths, the code uses the pPXF code of Michele Cappellari (2004, PASP, 116, 138) to fit a linear combination of stellar templates to the object spectrum before normalising the fitted spectrum and measuring the strength of the CaT on the normalised templates. The code also can be used as just a wrapper of pPXF to measure the line of sight velocity distribution of a spectra.
 
-The code uses pickled gcppxfdata objects to store data. Pickle is standard Python method to serialise (store) objects. 
+To use the code just run:
 
-gcppxf.py is the main code 
+single_ppxf.py file_name
 
-gcppxfplot.py allows you to view the fitted and normalised spectra.
+Most of the heavy lifting is done in run_ppxf.py. 
 
-The Python version of pPXF may be downloaded from Michele's website: http://www-astro.physics.ox.ac.uk/~mxc/software/ . The DEIMOS templates I used can be found in the templates directory in this repository. You will have to update the default_templates variable to the location of these files on your machine.
+The Python version of pPXF may be downloaded from Michele Cappellari's website: http://www-astro.physics.ox.ac.uk/~mxc/software/ . The DEIMOS templates I used can be found in the ppxf_templates directory in this repository. You will have to update the default_templates variable in run_ppxf.py to the location of these files on your machine.
 
 Besides pPXF, this code requires numpy, scipy, matplotlib and pyfits.
 
-If you use this code please cite Usher et al. (2012, MNRAS, 426, 1475) 
+If you use this code please cite Usher et al. (2012, MNRAS, 426, 1475) and Cappellari & Emsellem (2004, PASP, 116, 138).
 
 
 TODO:
@@ -18,4 +18,4 @@ TODO:
 Redo the code I had for automating large numbers of CaT measurements.
 
 Chris Usher
-2014-01-13
+2016-03-17
